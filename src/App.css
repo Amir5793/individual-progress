@@ -1,0 +1,50 @@
+@font-face {
+  font-family: "Romanica";
+  font-weight: normal;
+  font-style: normal;
+  src: url(./font/Romanica.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Roboto";
+  font-weight: normal;
+  font-style: normal;
+  src: url(./font/Roboto-Regular.ttf) format("truetype");
+}
+
+.App {
+  background-color: aliceblue;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Roboto";
+}
+
+.tasks-countainer {
+  width: 100vw;
+  height: 100vh;
+}
+
+.addBtn {
+  width: 5vw;
+  height: 5vw;
+  background-color: #c7ecee;
+  box-shadow: white 2px 2px 8px 2px;
+  position: absolute;
+  bottom: 3vw;
+  right: 3vw;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.addBtn svg {
+  width: 80%;
+}
+
+@media (orientation: portrait) {
+  .addBtn {
+    width: 15vw;
+    height: 15vw;
+  }
+}
