@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/individual-progress/static/css/main.f2f0d9b9.css",
-    "main.js": "/individual-progress/static/js/main.241fb1f5.js",
+    "main.css": "/individual-progress/static/css/main.133e47f2.css",
+    "main.js": "/individual-progress/static/js/main.61b2b486.js",
     "static/js/453.9b886195.chunk.js": "/individual-progress/static/js/453.9b886195.chunk.js",
     "static/media/Roboto-Regular.ttf": "/individual-progress/static/media/Roboto-Regular.5dd918926d41224c8142.ttf",
     "static/media/Romanica.ttf": "/individual-progress/static/media/Romanica.d19105b7d9f5e06ee4ae.ttf",
     "index.html": "/individual-progress/index.html",
-    "main.f2f0d9b9.css.map": "/individual-progress/static/css/main.f2f0d9b9.css.map",
-    "main.241fb1f5.js.map": "/individual-progress/static/js/main.241fb1f5.js.map",
+    "main.133e47f2.css.map": "/individual-progress/static/css/main.133e47f2.css.map",
+    "main.61b2b486.js.map": "/individual-progress/static/js/main.61b2b486.js.map",
     "453.9b886195.chunk.js.map": "/individual-progress/static/js/453.9b886195.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f2f0d9b9.css",
-    "static/js/main.241fb1f5.js"
+    "static/css/main.133e47f2.css",
+    "static/js/main.61b2b486.js"
   ]
 }
