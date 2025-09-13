@@ -1,0 +1,57 @@
+:root {
+  --color-toggle-light: yellow;
+  --color-toggle-dark: bisque;
+  --bg-color: #f0f8ff;
+  --text-color: #333;
+  --text-fade-color: #aaa;
+  --primary-color: #dff9fb;
+  --secondary-color: #c7ecee;
+  --border-color: #34495e;
+  --blue: #dff9fb !important;
+  --green: #55efc4 !important;
+  --red: #ff7675 !important;
+  --orange: #fab1a0 !important;
+  --yellow: #ffeaa7 !important;
+  --purpel: #a29bfe !important;
+  --pink: #fd79a8 !important;
+}
+
+[data-theme="dark"] {
+  --bg-color: #292a33 !important;
+  --text-color: #eee !important;
+  --secondary-color: #74b9ff !important;
+  --primary-color: #0984e3 !important;
+  --border-color: #ecf0f1 !important;
+  --blue: #0984e3 !important;
+  --green: #00b894 !important;
+  --red: #d63031 !important;
+  --orange: #e17055 !important;
+  --yellow: #fdcb6e !important;
+  --purpel: #6c5ce7 !important;
+  --pink: #e84393 !important;  
+}
+
+@font-face {
+  font-family: "Romanica";
+  font-weight: normal;
+  font-style: normal;
+  src: url(./font/Romanica.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Roboto";
+  font-weight: normal;
+  font-style: normal;
+  src: url(./font/Roboto-Regular.ttf) format("truetype");
+}
+
+.App {
+  background-color: var(--bg-color);
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Roboto";
+  transition: background-color ease 1s;
+}
+
+@media (orientation: portrait) {
+}

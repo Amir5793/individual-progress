@@ -1,0 +1,37 @@
+.progress-bar-countainer {
+  position: absolute;
+  bottom: 4vh;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 30vw;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.progress-bar {
+  width: 75%;
+  height: 50%;
+  border-radius: 30px;
+  border: 2px var(--border-color) solid;
+}
+.bar {
+  position: relative;
+  height: 100%;
+  border-radius: 30px;
+  transition: all ease-in-out 1s;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  color: var(--text-color);
+}
+.bar p {
+  position: absolute;
+  left: -3vw;
+}
+
+@media (orientation: portrait) {
+  .progress-bar-countainer {
+    width: 75vw;
+  }
+}
