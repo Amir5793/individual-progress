@@ -1,7 +1,7 @@
 [data-theme="dark"] .addBtn {
   box-shadow: none;
 }
-.container {
+.time-periods-container {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -68,7 +68,7 @@
 }
 
 @media (orientation: portrait) {
-  .container {
+  .time-periods-container {
     width: 100vw;
   }
   .addBtn {

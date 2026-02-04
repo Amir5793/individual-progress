@@ -78,7 +78,7 @@ export default function Tasks() {
     <div className="main-container">
       {!showModal && (
         <div>
-          <div className="container">
+          <div className="time-periods-container">
             <div className="time-periods">
               <h3 className="time-period active" onClick={timePeriodHandler}>
                 Daily
