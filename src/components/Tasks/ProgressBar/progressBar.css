@@ -34,4 +34,7 @@
   .progress-bar-countainer {
     width: 75vw;
   }
+  .bar p {
+    left: -10vw;
+  }
 }

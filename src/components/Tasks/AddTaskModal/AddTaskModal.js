@@ -21,6 +21,10 @@ export default function AddTaskModal({ showModal, setShowModal, setTasks }) {
               document.querySelector(".checked").previousElementSibling
                 .innerHTML,
             dateCreated: `Created at: ${nowDate.getFullYear()}/${nowDate.getMonth()}/${nowDate.getDay()}`,
+            dateHandler: nowDate.getDate(),
+            dayspassed: 0,
+            weeksPassed: 1,
+            monthsPassed: 1
           },
         ]);
         setShowModal(!showModal);

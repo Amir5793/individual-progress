@@ -53,5 +53,12 @@
   transition: background-color ease 1s;
 }
 
+.wrapper{
+  position: absolute;
+  top: 1vw;
+  left: 1vw;
+  padding: 0.5em;
+}
+
 @media (orientation: portrait) {
 }

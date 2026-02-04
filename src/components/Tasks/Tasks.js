@@ -10,39 +10,69 @@ export default function Tasks() {
       ? JSON.parse(localStorage.getItem("tasks"))
       : []
   );
+  const nowDate = new Date();
+  tasks.forEach((task) => {
+    // console.log(!(task.dateHandler == nowDate.getDay() - task.daysPassed))
+    if (
+      (task.dateHandler < nowDate.getDay() ||
+        task.dateHandler > nowDate.getDay()) &&
+      task.timePeriod === "Daily"
+    ) {
+      task.completed = false;
+      task.daysPassed = nowDate.getDay() - task.dateHandler;
+      task.dateHandler = nowDate.getDay();
+    }
+    if (
+      task.daysPassed / task.weeksPassed / 7 === 1 &&
+      task.timePeriod === "Weekly"
+    ) {
+      task.completed = false;
+      task.weeksPassed++;
+    }
+    if (
+      task.daysPassed / task.monthsPassed / 30 === 1 &&
+      task.timePeriod === "Monthly"
+    ) {
+      task.completed = false;
+      task.monthspassed++;
+    }
+  });
 
-  let [showModal, setShowModal] = useState(false);
-  let [btn, setBtn] = useState(false);
   let [timePeriod, setTimePeriod] = useState("Daily");
+  let [showModal, setShowModal] = useState(false);
+  let [btn] = useState(false);
 
   let completedTasksLentgh = 0;
   tasks.forEach((task) => {
-    task.completed && task.timePeriod == timePeriod && completedTasksLentgh++;
+    task.completed && task.timePeriod === timePeriod && completedTasksLentgh++;
   });
   let tasksLentgh = 0;
   tasks.forEach((task) => {
-    task.timePeriod == timePeriod && tasksLentgh++;
+    task.timePeriod === timePeriod && tasksLentgh++;
   });
-  
+
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
-  
+
   const timePeriodHandler = (e) => {
     const timePeriods = document.querySelectorAll(".time-period");
-    
+
     timePeriods.forEach((timePeriod) => {
       timePeriod.classList.remove("active");
     });
-    
+
     e.target.classList.add("active");
     setTimePeriod(e.target.innerHTML);
   };
-  
+
   const clearAllHandler = () => {
     localStorage.setItem("tasks", JSON.stringify([]));
     setTasks([]);
   };
+
+  console.log(nowDate.getDate());
+  console.log(tasks);
   return (
     <div className="main-countainer">
       {!showModal && (
@@ -62,7 +92,7 @@ export default function Tasks() {
             {tasks.map(
               (task) =>
                 !task.completed &&
-                task.timePeriod == timePeriod && (
+                task.timePeriod === timePeriod && (
                   <Task
                     key={task.id}
                     id={task.id}
@@ -78,7 +108,7 @@ export default function Tasks() {
             {tasks.map(
               (task) =>
                 task.completed &&
-                task.timePeriod == timePeriod && (
+                task.timePeriod === timePeriod && (
                   <Task
                     key={task.id}
                     id={task.id}
