@@ -14,7 +14,7 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
-
+/* a note */
 .time-periods {
   position: sticky;
   top: 0px;
