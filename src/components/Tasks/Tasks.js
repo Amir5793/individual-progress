@@ -9,6 +9,7 @@ export default function Tasks() {
     JSON.parse(localStorage.getItem("tasks"))
       ? JSON.parse(localStorage.getItem("tasks"))
       : []
+      
   );
   const nowDate = new Date();
   tasks.forEach((task) => {
@@ -34,7 +35,7 @@ export default function Tasks() {
       task.timePeriod === "Monthly"
     ) {
       task.completed = false;
-      task.monthspassed++;
+      task.monthsPassed++;
     }
   });
 
@@ -42,13 +43,13 @@ export default function Tasks() {
   let [showModal, setShowModal] = useState(false);
   let [btn] = useState(false);
 
-  let completedTasksLentgh = 0;
+  let completedTasksLength = 0;
   tasks.forEach((task) => {
-    task.completed && task.timePeriod === timePeriod && completedTasksLentgh++;
+    task.completed && task.timePeriod === timePeriod && completedTasksLength++;
   });
-  let tasksLentgh = 0;
+  let tasksLength = 0;
   tasks.forEach((task) => {
-    task.timePeriod === timePeriod && tasksLentgh++;
+    task.timePeriod === timePeriod && tasksLength++;
   });
 
   useEffect(() => {
@@ -74,10 +75,10 @@ export default function Tasks() {
   console.log(nowDate.getDate());
   console.log(tasks);
   return (
-    <div className="main-countainer">
+    <div className="main-container">
       {!showModal && (
         <div>
-          <div className="countainer">
+          <div className="container">
             <div className="time-periods">
               <h3 className="time-period active" onClick={timePeriodHandler}>
                 Daily
@@ -104,7 +105,7 @@ export default function Tasks() {
                   ></Task>
                 )
             )}
-            <br className="devider" />
+            <br className="divider" />
             {tasks.map(
               (task) =>
                 task.completed &&
@@ -122,8 +123,8 @@ export default function Tasks() {
             )}
           </div>
           <ProgressBar
-            completedTasksLentgh={completedTasksLentgh}
-            tasksLentgh={tasksLentgh}
+            completedTasksLength={completedTasksLength}
+            tasksLength={tasksLength}
           ></ProgressBar>
           <div
             className="clear-all"

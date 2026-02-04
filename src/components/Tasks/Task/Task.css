@@ -34,14 +34,14 @@
   color: var(--text-color);
   transition: color 0.3s ease;
 }
-.conditionary-countainer {
+.conditional-container {
   height: 100%;
   width: 25%;
   display: flex;
   align-items: center;
   z-index: 2;
 }
-.conditionary-countainer svg {
+.conditional-container svg {
   width: 100%;
   height: 100%;
   margin-right: 0.5vw;
@@ -49,7 +49,7 @@
   z-index: 2;
   transition: all ease 0.2s;
 }
-.conditionary-countainer svg:hover {
+.conditional-container svg:hover {
   transform: scale(1.2);
 }
 .checkbox {
@@ -83,7 +83,7 @@
   background-color: var(--yellow);
 }
 .purple {
-  background-color: var(--purpel);
+  background-color: var(--purple);
 }
 .pink {
   background-color: var(--pink);

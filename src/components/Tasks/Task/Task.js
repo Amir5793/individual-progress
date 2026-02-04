@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Task.css";
 
-export default function ({ name, completed, setTasks, id, dateCreated, color }) {
+export default function Task({ name, completed, setTasks, id, dateCreated, color }) {
   let [isCompleted, setIsCompleted] = useState(completed);
 
   const CheckHandler = () => {
@@ -27,7 +27,7 @@ export default function ({ name, completed, setTasks, id, dateCreated, color }) 
       {!isCompleted && <div className="task-header">{name}</div>}
       {isCompleted && <div className="task-header completed">{name}</div>}
       <div className="date">{dateCreated}</div>
-      <div className="conditionary-countainer">
+      <div className="conditional-container">
         <svg
           onClick={deleteHandler}
           xmlns="http://www.w3.org/2000/svg"

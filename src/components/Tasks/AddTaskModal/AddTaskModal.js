@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React } from "react";
 import "./AddTaskModal.css";
 
 export default function AddTaskModal({ showModal, setShowModal, setTasks }) {
@@ -22,7 +22,7 @@ export default function AddTaskModal({ showModal, setShowModal, setTasks }) {
                 .innerHTML,
             dateCreated: `Created at: ${nowDate.getFullYear()}/${nowDate.getMonth()}/${nowDate.getDay()}`,
             dateHandler: nowDate.getDate(),
-            dayspassed: 0,
+            daysPassed: 0,
             weeksPassed: 1,
             monthsPassed: 1
           },
@@ -57,7 +57,7 @@ export default function AddTaskModal({ showModal, setShowModal, setTasks }) {
   };
 
   return (
-    <div className="modal-countainer">
+    <div className="modal-container">
       <div className="close-btn" onClick={modalHider}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path
@@ -71,7 +71,7 @@ export default function AddTaskModal({ showModal, setShowModal, setTasks }) {
       </div>
       <div className="body">
         <input type="text" />
-        <div className="radio-countainer">
+        <div className="radio-container">
           <div className="dailyTimePeriod">
             <label htmlFor="dailyTimePeriod">Daily</label>
             <input
@@ -103,7 +103,7 @@ export default function AddTaskModal({ showModal, setShowModal, setTasks }) {
             />
           </div>
         </div>
-        <div className="color-radio-countainer">
+        <div className="color-radio-container">
           <div className="blue color active" onClick={colorPicker}></div>
           <div className="green color" onClick={colorPicker}></div>
           <div className="red color" onClick={colorPicker}></div>

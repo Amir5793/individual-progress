@@ -1,4 +1,4 @@
-.modal-countainer {
+.modal-container {
   width: 50vw;
   height: 40vh;
   background-color: var(--primary-color);
@@ -58,7 +58,7 @@
   border-bottom-right-radius: 30px;
   border: none;
 }
-.radio-countainer {
+.radio-container {
   display: flex;
   gap: 5px;
 }
@@ -125,7 +125,7 @@
   transform: translate(-50%, -50%);
 }
 
-.color-radio-countainer {
+.color-radio-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -146,7 +146,7 @@
 }
 
 @media (orientation: portrait) {
-  .modal-countainer {
+  .modal-container {
     width: 90%;
     height: 25%;
     border-radius: 5px;
