@@ -1,4 +1,4 @@
-.add-btns-container{
+.add-btns-container {
     position: absolute;
     width: 15vw;
     height: 15vh;
@@ -32,13 +32,9 @@
     position: relative;
     right: 0px;
     bottom: 0px;
-} 
-.btn-toggle{
-    /* position: relative;
-    bottom: 3vw;
-    right: 3vw; */
 }
-.add-task-btn{
+
+.add-task-btn {
     position: absolute;
     width: 5vw;
     bottom: 6vw;
@@ -52,9 +48,9 @@
     border-top-left-radius: 7px;
     background-color: var(--primary-color);
     transition: all ease .5s;
-    /* color: --text-color; */
 }
-.add-target-btn{
+
+.add-target-btn {
     position: absolute;
     width: 5vw;
     bottom: 6vw;
@@ -67,24 +63,25 @@
     border-top-left-radius: 7px;
     background-color: var(--primary-color);
     transition: all ease .25s;
-
-    
 }
-.hidden{
+
+.hidden {
     height: 0vw;
     color: transparent;
 }
-.shown{
+
+.shown {
     height: 6vw;
     color: var(--text-color);
-    /* transform: rotate(270deg); */
 }
-.rotate{
-        transform: rotate(270deg);
-        right: 7vw;
-        bottom: 2.5vw;
+
+.rotate {
+    transform: rotate(270deg);
+    right: 7vw;
+    bottom: 2.5vw;
 }
-.re-rotate{
+
+.re-rotate {
     transform: rotate(-270deg);
     bottom: 6vw;
     right: 3vw;
@@ -92,22 +89,26 @@
 
 @media (orientation: portrait) {
     .add-btn {
-      width: 15vw;
-      height: 15vw;
+        width: 15vw;
+        height: 15vw;
     }
-    .add-task-btn{
+
+    .add-task-btn {
         width: 15vw;
         font-size: 4.5vw;
     }
-    .add-target-btn{
+
+    .add-target-btn {
         width: 15vw;
         font-size: 4.5vw;
     }
-    .shown{
+
+    .shown {
         height: 24vw;
     }
-    .rotate{
-       bottom: -1.5vw;
-       right: 10vw;
+
+    .rotate {
+        bottom: -1.5vw;
+        right: 10vw;
     }
-  }
+}

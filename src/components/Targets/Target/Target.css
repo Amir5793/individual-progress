@@ -3,7 +3,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  /* background-color: var(--primary-color); */
   box-shadow: var(--secondary-color) 1px 1px 8px 1px inset;
   width: 25vw;
   height: 8vh;

@@ -1,12 +1,13 @@
 import { React, useRef } from 'react'
 import "./AddButton.css"
 
-export default function AddButton({ setShowModal, showModal, showTargetsModal, setShowTargetsModal }) {
+export default function AddButton({ setShowModal, showModal }) {
     const addTaskBtn = useRef(null)
     const addTargetBtn = useRef(null)
     const addBtn = useRef(null)
     let toggle = true
     const addBtnToggler = () => {
+        // opens and closes the AddBtn at the bottom right and shows the options
         if (toggle) {
             addBtn.current.classList.add("rotate")
             addTaskBtn.current.classList.add("shown")
@@ -31,7 +32,6 @@ export default function AddButton({ setShowModal, showModal, showTargetsModal, s
     }
 
     return (
-        <>
             <div className="add-btns-container">
                 <div className="btn-toggle">
                     <div className="add-btn" onClick={addBtnToggler}>
@@ -55,7 +55,7 @@ export default function AddButton({ setShowModal, showModal, showTargetsModal, s
                         className="add-target-btn hidden"
                         ref={addTargetBtn}
                         onClick={() => {
-                            setShowTargetsModal(!showTargetsModal)
+                            setShowModal(!showModal)
                         }}
                     >
 
@@ -63,6 +63,5 @@ export default function AddButton({ setShowModal, showModal, showTargetsModal, s
                     </div>
                 </div>
             </div>
-        </>
     )
 }

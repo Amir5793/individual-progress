@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./Tasks.css";
 import Task from "./Task/Task.js";
-import AddTaskModal from "./AddTaskModal/AddTaskModal.js";
-import ProgressBar from "./ProgressBar/ProgressBar.js";
+import AddModal from "../AddModal/AddModal.js";
+import ProgressBar from "../ProgressBar/ProgressBar.js";
 
-export default function Tasks({showModal, setShowModal}) {
+export default function Tasks({ showModal, setShowModal }) {
   let [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem("tasks"))
       ? JSON.parse(localStorage.getItem("tasks"))
       : []
-      
+
   );
 
   const nowDate = new Date();
@@ -93,7 +93,7 @@ export default function Tasks({showModal, setShowModal}) {
                   <Task
                     key={task.id}
                     id={task.id}
-                    name={task.task}
+                    name={task.value}
                     color={task.color}
                     completed={task.completed}
                     dateCreated={task.dateCreated}
@@ -109,7 +109,7 @@ export default function Tasks({showModal, setShowModal}) {
                   <Task
                     key={task.id}
                     id={task.id}
-                    name={task.task}
+                    name={task.value}
                     color={task.color}
                     completed={task.completed}
                     dateCreated={task.dateCreated}
@@ -119,8 +119,8 @@ export default function Tasks({showModal, setShowModal}) {
             )}
           </div>
           <ProgressBar
-            completedTasksLength={completedTasksLength}
-            tasksLength={tasksLength}
+            completedValuesLength={completedTasksLength}
+            valuesLength={tasksLength}
           ></ProgressBar>
           <div
             className="clear-all"
@@ -139,11 +139,12 @@ export default function Tasks({showModal, setShowModal}) {
       )}
 
       {showModal && (
-        <AddTaskModal
+        <AddModal
           showModal={showModal}
           setShowModal={setShowModal}
           setTasks={setTasks}
-        ></AddTaskModal>
+          isTaskModal={true}
+        ></AddModal>
       )}
     </div>
   );

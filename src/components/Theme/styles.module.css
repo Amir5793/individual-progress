@@ -6,7 +6,7 @@
   display: none;
 }
 
-.container input + div {
+.container input+div {
   border-radius: 50%;
   width: 36px;
   height: 36px;
@@ -16,7 +16,7 @@
   transition: box-shadow 0.5s ease 0s, transform 0.4s ease 0.1s;
 }
 
-.container input + div::before {
+.container input+div::before {
   content: "";
   width: inherit;
   height: inherit;
@@ -27,7 +27,7 @@
   transition: background 0.3s ease;
 }
 
-.container input + div::after {
+.container input+div::after {
   content: "";
   width: 8px;
   height: 8px;
@@ -48,18 +48,18 @@
   transition: all 0.3s ease;
 }
 
-.container input:checked + div {
+.container input:checked+div {
   box-shadow: inset 32px -32px 0 0 #fff;
   transform: scale(0.5) rotate(0deg);
   transition: transform 0.3s ease 0.1s, box-shadow 0.2s ease 0s;
 }
 
-.container input:checked + div::before {
+.container input:checked+div::before {
   background: var(--color-toggle-light, #eee);
   transition: background 0.3s ease 0.1s;
 }
 
-.container input:checked + div::after {
+.container input:checked+div::after {
   transform: scale(1.5);
   transition: transform 0.5s ease 0.15s;
 }

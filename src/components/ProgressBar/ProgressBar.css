@@ -9,12 +9,14 @@
   align-items: center;
   justify-content: center;
 }
+
 .progress-bar {
   width: 75%;
   height: 50%;
   border-radius: 30px;
   border: 2px var(--border-color) solid;
 }
+
 .bar {
   position: relative;
   height: 100%;
@@ -25,6 +27,7 @@
   align-items: center;
   color: var(--text-color);
 }
+
 .bar p {
   position: absolute;
   left: -3vw;
@@ -34,6 +37,7 @@
   .progress-bar-container {
     width: 75vw;
   }
+
   .bar p {
     left: -10vw;
   }

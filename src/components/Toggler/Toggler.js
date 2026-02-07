@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Toggler.css"
 
-export default function Toggler({setToggle}) {
+export default function Toggler({ setToggle }) {
 
     const toggleAbleHandler = (e) => {
         const timePeriods = document.querySelectorAll(".toggle-able");

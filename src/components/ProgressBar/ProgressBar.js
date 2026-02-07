@@ -1,17 +1,17 @@
 import { React, useEffect } from "react";
-import "./progressBar.css";
+import "./ProgressBar.css";
 
-export default function ProgressBar({ completedTasksLength, tasksLength }) {
+export default function ProgressBar({ completedValuesLength, valuesLength }) {
 
   useEffect(() => {
     const bar = document.querySelector(".bar");
-    if (completedTasksLength === 0) {
+    if (completedValuesLength === 0) {
       bar.style.width = "0%";
     } else {
-      let barPercent = (completedTasksLength / tasksLength) * 100;
+      let barPercent = (completedValuesLength / valuesLength) * 100;
 
-      bar.style.width = ((completedTasksLength - 1) / tasksLength) * 100 + "%";
-      
+      bar.style.width = ((completedValuesLength - 1) / valuesLength) * 100 + "%";
+
       setTimeout(() => {
         bar.style.width = barPercent + "%";
       }, 10);
@@ -26,11 +26,11 @@ export default function ProgressBar({ completedTasksLength, tasksLength }) {
         bar.style.backgroundColor = "#2ecc71";
       }
     }
-  }, [completedTasksLength, tasksLength]);
+  }, [completedValuesLength, valuesLength]);
   return (
     <div className="progress-bar-container">
       <div className="progress-bar">
-        <div className="bar"><p>{`${completedTasksLength}/${tasksLength}`}</p></div>
+        <div className="bar"><p>{`${completedValuesLength}/${valuesLength}`}</p></div>
       </div>
     </div>
   );

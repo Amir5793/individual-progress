@@ -28,7 +28,7 @@
   --orange: #e17055 !important;
   --yellow: #fdcb6e !important;
   --purple: #6c5ce7 !important;
-  --pink: #e84393 !important;  
+  --pink: #e84393 !important;
 }
 
 @font-face {
@@ -37,6 +37,7 @@
   font-style: normal;
   src: url(./font/Romanica.ttf) format("truetype");
 }
+
 @font-face {
   font-family: "Roboto";
   font-weight: normal;
@@ -53,12 +54,11 @@
   transition: background-color ease 1s;
 }
 
-.wrapper{
+.wrapper {
   position: absolute;
   top: 1vw;
   left: 1vw;
   padding: 0.5em;
 }
 
-@media (orientation: portrait) {
-}
+@media (orientation: portrait) {}

@@ -2,7 +2,7 @@
   box-shadow: none;
 }
 
-.time-periods-container {
+.targets-time-periods-container {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -16,7 +16,7 @@
   overflow-x: hidden;
 }
 
-.time-periods {
+.targets-time-periods {
   position: sticky;
   top: 0px;
   width: 100%;
@@ -30,7 +30,7 @@
   transition: background-color ease 1s;
 }
 
-.active {
+.active-target {
   border-bottom: 1px var(--text-color) solid;
   transform: scale(0.8);
   padding-bottom: 2%;
@@ -51,7 +51,7 @@
 }
 
 @media (orientation: portrait) {
-  .time-periods-container {
+  .targets-time-periods-container {
     width: 100vw;
   }
 

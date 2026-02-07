@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import ToggleButton from "./components/Theme/ReactThemeToggle";
 import "./App.css";
+import ToggleButton from "./components/Theme/ReactThemeToggle";
 import Toggler from "./components/Toggler/Toggler.js";
 import AddButton from "./components/AddButton/AddButton.js"
 import Tasks from "./components/Tasks/Tasks.js";
-import Targets from "./components/Target/Targets.js";
+import Targets from "./components/Targets/Targets.js";
 // import { computeHeadingLevel } from "@testing-library/dom";
 // import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import styled from "styled-components";
@@ -18,7 +18,6 @@ const Wrapper = styled.div`
 
 function App() {
   let [showModal, setShowModal] = useState();
-  let [showTargetsModal, setShowTargetsModal] = useState(false)
   let [toggle, setToggle] = useState("Tasks")
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem("theme")) === true ? false : true
@@ -41,7 +40,6 @@ function App() {
     localStorage.setItem("theme", JSON.stringify(darkMode));
   };
 
-  // setShowModal(true)
   return (
     <div className="App">
       <Toggler
@@ -56,16 +54,13 @@ function App() {
       }
       {toggle === "Targets" &&
         <Targets 
-        showTargetsModal = {showTargetsModal}
-        setShowTargetsModal = {setShowTargetsModal}/>
+        showModal = {showModal}
+        setShowModal = {setShowModal}/>
       }
-      {/* <Targets></Targets> */}
-      {!showModal && !showTargetsModal &&
+      {!showModal &&
         <AddButton
           showModal={showModal}
           setShowModal={setShowModal}
-          showTargetsModal={showTargetsModal}
-          setShowTargetsModal={setShowTargetsModal}
         ></AddButton>
       }
 
