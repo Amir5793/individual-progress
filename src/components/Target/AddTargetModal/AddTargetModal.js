@@ -1,22 +1,22 @@
 import { React, useState } from "react";
-import "./AddTaskModal.css";
+import "./AddTargetModal.css";
 // import { createGlobalStyle } from "styled-components";
 
-export default function AddTaskModal({ showModal, setShowModal, setTasks, tasks }) {
+export default function AddTargetModal({ showTargetsModal, setShowTargetsModal, setTargets, targets }) {
   let color = "blue"
   let [error, setError] = useState(null)
 
-  const addTask = () => {
+  const addTarget = () => {
     const input = document.querySelector("input");
-    const task = input.value;
+    const target = input.value;
     const nowDate = new Date();
-    if (task) {
+    if (target) {
       if (document.querySelector(".checked")) {
-        setTasks((prevTasks) => [
-          ...prevTasks,
+        setTargets((prevTargets) => [
+          ...prevTargets,
           {
-            id: prevTasks.length,
-            task: task,
+            id: prevTargets.length,
+            target: target,
             color: color,
             completed: false,
             timePeriod:
@@ -29,17 +29,17 @@ export default function AddTaskModal({ showModal, setShowModal, setTasks, tasks 
             monthsPassed: 1
           },
         ]);
-        setShowModal(!showModal);
+        setShowTargetsModal(!showTargetsModal);
       }else{
         setError("Please select a time period first")
       }
     }else{
-      setError("please enter a task first")
+      setError("please enter a target first")
     }
   };
 
   const modalHider = () => {
-    setShowModal(!showModal);
+    setShowTargetsModal(!showTargetsModal);
   };
 
   const timeCheckHandler = (e) => {
@@ -73,7 +73,7 @@ export default function AddTaskModal({ showModal, setShowModal, setTasks, tasks 
         </svg>
       </div>
       <div className="header">
-        <h1>Enter the task title and time</h1>
+        <h1>Enter the target title and time</h1>
       </div>
       <div className="body">
         <input type="text" />
@@ -123,7 +123,7 @@ export default function AddTaskModal({ showModal, setShowModal, setTasks, tasks 
         <h2>{error} {error && "!"}</h2>
       </div>
       <div className="btn">
-        <button onClick={addTask}>
+        <button onClick={addTarget}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

@@ -34,26 +34,6 @@
   padding-bottom: 2%;
 }
 
-.addBtn {
-  width: 5vw;
-  height: 5vw;
-  background-color: var(--primary-color);
-  box-shadow: var(--secondary-color) 2px 2px 8px 2px;
-  position: absolute;
-  bottom: 3vw;
-  right: 3vw;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-.addBtn svg {
-  width: 80%;
-  transition: all ease 1s;
-  position: relative;
-}
-
 .clear-all {
   width: 3vw;
   height: 3vw;
@@ -70,10 +50,6 @@
 @media (orientation: portrait) {
   .time-periods-container {
     width: 100vw;
-  }
-  .addBtn {
-    width: 15vw;
-    height: 15vw;
   }
   .clear-all{
     width: 10vw;

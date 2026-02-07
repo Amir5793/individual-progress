@@ -4,16 +4,16 @@ import Task from "./Task/Task.js";
 import AddTaskModal from "./AddTaskModal/AddTaskModal.js";
 import ProgressBar from "./ProgressBar/ProgressBar.js";
 
-export default function Tasks() {
+export default function Tasks({showModal, setShowModal}) {
   let [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem("tasks"))
       ? JSON.parse(localStorage.getItem("tasks"))
       : []
       
   );
+
   const nowDate = new Date();
   tasks.forEach((task) => {
-    // console.log(!(task.dateHandler == nowDate.getDay() - task.daysPassed))
     if (
       (task.dateHandler < nowDate.getDay() ||
         task.dateHandler > nowDate.getDay()) &&
@@ -40,8 +40,6 @@ export default function Tasks() {
   });
 
   let [timePeriod, setTimePeriod] = useState("Daily");
-  let [showModal, setShowModal] = useState(false);
-  let [btn] = useState(false);
 
   let completedTasksLength = 0;
   tasks.forEach((task) => {
@@ -72,8 +70,6 @@ export default function Tasks() {
     setTasks([]);
   };
 
-  console.log(nowDate.getDate());
-  console.log(tasks);
   return (
     <div className="main-container">
       {!showModal && (
@@ -139,21 +135,6 @@ export default function Tasks() {
               />
             </svg>
           </div>
-          {!btn && (
-            <div
-              className="addBtn"
-              onClick={() => {
-                setShowModal(true);
-              }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M11 13H6q-.425 0-.712-.288T5 12t.288-.712T6 11h5V6q0-.425.288-.712T12 5t.713.288T13 6v5h5q.425 0 .713.288T19 12t-.288.713T18 13h-5v5q0 .425-.288.713T12 19t-.712-.288T11 18z"
-                />
-              </svg>
-            </div>
-          )}
         </div>
       )}
 
