@@ -35,6 +35,6 @@
     width: 75vw;
   }
   .bar p {
-    left: -10vw;
+    left: -10vw !important;
   }
 }
