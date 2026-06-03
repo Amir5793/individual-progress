@@ -1,31 +1,31 @@
 import React, { useState } from "react";
-import "./Target.css";
+import "./Habit.css";
 
-export default function Target({ name, completed, setTargets, id, dateCreated, color }) {
+export default function Habits({ name, completed, setHabits, id, dateCreated, color }) {
   let [isCompleted, setIsCompleted] = useState(completed);
 
   const CheckHandler = () => {
-    setTargets((prevTargets) => {
-      const newTargets = prevTargets.map((target) =>
-        target.id === id ? { ...target, completed: !target.completed } : target
+    setHabits((prevHabits) => {
+      const newHabits = prevHabits.map((habit) =>
+        habit.id === id ? { ...habit, completed: !habit.completed } : habit
       );
-      localStorage.setItem("targets", JSON.stringify(newTargets));
-      return newTargets;
+      localStorage.setItem("habits", JSON.stringify(newHabits));
+      return newHabits;
     });
     setIsCompleted(!isCompleted);
   };
   const deleteHandler = () => {
-    setTargets((prevTargets) => {
-      const newTargets = prevTargets.filter((target) => target.id !== id);
-      localStorage.setItem("targets", JSON.stringify(newTargets));
-      return newTargets;
+    setHabits((prevHabits) => {
+      const newHabits = prevHabits.filter((habit) => habit.id !== id);
+      localStorage.setItem("habits", JSON.stringify(newHabits));
+      return newHabits;
     });
   };
 
   return (
     <div className={`container ${color}`}>
-      {!isCompleted && <div className="target-header">{name}</div>}
-      {isCompleted && <div className="target-header completed">{name}</div>}
+      {!isCompleted && <div className="habit-header">{name}</div>}
+      {isCompleted && <div className="habit-header completed">{name}</div>}
       <div className="date">{dateCreated}</div>
       <div className="conditional-container">
         <svg

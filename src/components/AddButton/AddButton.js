@@ -3,7 +3,7 @@ import "./AddButton.css"
 
 export default function AddButton({ setShowModal, showModal }) {
     const addTaskBtn = useRef(null)
-    const addTargetBtn = useRef(null)
+    const addHabitBtn = useRef(null)
     const addBtn = useRef(null)
     let toggle = true
     const addBtnToggler = () => {
@@ -11,21 +11,21 @@ export default function AddButton({ setShowModal, showModal }) {
         if (toggle) {
             addBtn.current.classList.add("rotate")
             addTaskBtn.current.classList.add("shown")
-            addTargetBtn.current.classList.add("shown")
+            addHabitBtn.current.classList.add("shown")
             setTimeout(() => {
-                addTargetBtn.current.classList.add("rotate")
+                addHabitBtn.current.classList.add("rotate")
             }, 500)
             toggle = !toggle
         } else {
-            addTargetBtn.current.classList.add("re-rotate")
+            addHabitBtn.current.classList.add("re-rotate")
             addBtn.current.classList.add("re-rotate")
-            addTargetBtn.current.classList.remove("rotate")
+            addHabitBtn.current.classList.remove("rotate")
             addBtn.current.classList.remove("rotate")
-            addTargetBtn.current.classList.remove("re-rotate")
+            addHabitBtn.current.classList.remove("re-rotate")
             addBtn.current.classList.remove("re-rotate")
             setTimeout(() => {
                 addTaskBtn.current.classList.remove("shown")
-                addTargetBtn.current.classList.remove("shown")
+                addHabitBtn.current.classList.remove("shown")
             }, 500)
             toggle = !toggle
         }
@@ -46,20 +46,22 @@ export default function AddButton({ setShowModal, showModal }) {
                         className="add-task-btn hidden"
                         ref={addTaskBtn}
                         onClick={() => {
-                            setShowModal(!showModal);
+                            // console.log('second')
+                            setShowModal("task");
                         }}
                     >
                         <label>Task</label>
                     </div>
                     <div
-                        className="add-target-btn hidden"
-                        ref={addTargetBtn}
+                        className="add-habit-btn hidden"
+                        ref={addHabitBtn}
                         onClick={() => {
-                            setShowModal(!showModal)
+                            // console.log('first')
+                            setShowModal("habit")
                         }}
                     >
 
-                        <label>Target</label>
+                        <label>Habit</label>
                     </div>
                 </div>
             </div>

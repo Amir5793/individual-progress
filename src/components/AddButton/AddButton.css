@@ -23,7 +23,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 1;
+    z-index: 2;
 }
 
 .add-btn svg {
@@ -48,9 +48,10 @@
     border-top-left-radius: 7px;
     background-color: var(--primary-color);
     transition: all ease .5s;
+    z-index: 1;
 }
 
-.add-target-btn {
+.add-habit-btn {
     position: absolute;
     width: 5vw;
     bottom: 6vw;
@@ -63,6 +64,7 @@
     border-top-left-radius: 7px;
     background-color: var(--primary-color);
     transition: all ease .25s;
+    z-index: 1;
 }
 
 .hidden {
@@ -98,7 +100,7 @@
         font-size: 4.5vw;
     }
 
-    .add-target-btn {
+    .add-habit-btn {
         width: 15vw;
         font-size: 4.5vw;
     }

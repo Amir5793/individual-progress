@@ -20,7 +20,7 @@ export default function Toggler({ setToggle }) {
                 Tasks
             </h3>
             <h3 className="toggle-able" onClick={toggleAbleHandler}>
-                Targets
+                Habits
             </h3>
         </div>
     )

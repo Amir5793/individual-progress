@@ -4,16 +4,26 @@ import Task from "./Task/Task.js";
 import AddModal from "../AddModal/AddModal.js";
 import ProgressBar from "../ProgressBar/ProgressBar.js";
 
-export default function Tasks({ showModal, setShowModal }) {
-  let [tasks, setTasks] = useState(
+export default function Tasks({ showModal, setShowModal, tasks: parentTasks, setTasks: setParentTasks }) {
+  const [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem("tasks"))
       ? JSON.parse(localStorage.getItem("tasks"))
       : []
-
   );
 
+  // Use parent state if provided, otherwise use local state
+  const displayTasks = parentTasks && parentTasks.length > 0 ? parentTasks : tasks;
+  
+  // Sync local state when parent state changes
+  useEffect(() => {
+    if (parentTasks && parentTasks.length > 0) {
+      setTasks(parentTasks);
+    }
+  }, [parentTasks]);
+
   const nowDate = new Date();
-  tasks.forEach((task) => {
+  const displayTasksCopy = displayTasks.map(t => ({...t}));
+  displayTasksCopy.forEach((task) => {
     if (
       (task.dateHandler < nowDate.getDay() ||
         task.dateHandler > nowDate.getDay()) &&
@@ -42,17 +52,13 @@ export default function Tasks({ showModal, setShowModal }) {
   let [timePeriod, setTimePeriod] = useState("Daily");
 
   let completedTasksLength = 0;
-  tasks.forEach((task) => {
+  displayTasksCopy.forEach((task) => {
     task.completed && task.timePeriod === timePeriod && completedTasksLength++;
   });
   let tasksLength = 0;
-  tasks.forEach((task) => {
+  displayTasksCopy.forEach((task) => {
     task.timePeriod === timePeriod && tasksLength++;
   });
-
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
 
   const timePeriodHandler = (e) => {
     const timePeriods = document.querySelectorAll(".time-period");
@@ -66,8 +72,12 @@ export default function Tasks({ showModal, setShowModal }) {
   };
 
   const clearAllHandler = () => {
-    localStorage.setItem("tasks", JSON.stringify([]));
-    setTasks([]);
+    if (setParentTasks) {
+      setParentTasks([]);
+    } else {
+      localStorage.setItem("tasks", JSON.stringify([]));
+      setTasks([]);
+    }
   };
 
   return (
@@ -86,7 +96,7 @@ export default function Tasks({ showModal, setShowModal }) {
                 Monthly
               </h3>
             </div>
-            {tasks.map(
+            {displayTasksCopy.map(
               (task) =>
                 !task.completed &&
                 task.timePeriod === timePeriod && (
@@ -97,12 +107,12 @@ export default function Tasks({ showModal, setShowModal }) {
                     color={task.color}
                     completed={task.completed}
                     dateCreated={task.dateCreated}
-                    setTasks={setTasks}
+                    setTasks={setParentTasks || setTasks}
                   ></Task>
                 )
             )}
             <br className="divider" />
-            {tasks.map(
+            {displayTasksCopy.map(
               (task) =>
                 task.completed &&
                 task.timePeriod === timePeriod && (
@@ -113,7 +123,7 @@ export default function Tasks({ showModal, setShowModal }) {
                     color={task.color}
                     completed={task.completed}
                     dateCreated={task.dateCreated}
-                    setTasks={setTasks}
+                    setTasks={setParentTasks || setTasks}
                   ></Task>
                 )
             )}
@@ -137,15 +147,16 @@ export default function Tasks({ showModal, setShowModal }) {
           </div>
         </div>
       )}
-
-      {showModal && (
+{/* 
+      {showModal === "task" && (
         <AddModal
           showModal={showModal}
           setShowModal={setShowModal}
           setTasks={setTasks}
           isTaskModal={true}
+          // isTargetModal={false}
         ></AddModal>
-      )}
+      )} */}
     </div>
   );
 }

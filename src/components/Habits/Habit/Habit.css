@@ -22,7 +22,7 @@
   color: var(--text-fade-color);
 }
 
-.target-header {
+.habit-header {
   width: 75%;
   height: 100%;
   display: flex;
