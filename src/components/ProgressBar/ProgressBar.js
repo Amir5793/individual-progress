@@ -30,6 +30,7 @@ export default function ProgressBar({ completedValuesLength, valuesLength }) {
   return (
     <div className="progress-bar-container">
       <div className="progress-bar">
+        <div className="bar"></div>
         <div className="bar"><p>{`${completedValuesLength}/${valuesLength}`}</p></div>
       </div>
     </div>

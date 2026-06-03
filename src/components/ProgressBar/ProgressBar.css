@@ -39,6 +39,6 @@
   }
 
   .bar p {
-    left: -10vw;
+    left: -10vw !important;
   }
 }
