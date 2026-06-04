@@ -3,7 +3,6 @@ import "./Task.css";
 
 export default function Task({ name, completed, setTasks, id, dateCreated, color }) {
   let [isCompleted, setIsCompleted] = useState(completed);
-  console.log('Task is being shown')
 
   const CheckHandler = () => {
     setTasks((prevTasks) => {

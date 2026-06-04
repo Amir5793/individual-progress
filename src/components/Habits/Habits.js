@@ -5,11 +5,14 @@ import AddModal from "../AddModal/AddModal";
 import ProgressBar from "../ProgressBar/ProgressBar";
 
 export default function Habits({ showModal, setShowModal, habits: parentHabits, setHabits: setParentHabits }) {
-  const [habits, setHabits] = useState(
-    JSON.parse(localStorage.getItem("habits"))
-      ? JSON.parse(localStorage.getItem("habits"))
-      : [],
-  );
+  const [habits, setHabits] = useState(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem("habits"));
+      return Array.isArray(stored) ? stored : [];
+    } catch {
+      return [];
+    }
+  });
 
   // Use parent state if provided, otherwise use local state
   const displayHabits = parentHabits && parentHabits.length > 0 ? parentHabits : habits;
@@ -69,7 +72,7 @@ export default function Habits({ showModal, setShowModal, habits: parentHabits, 
     });
 
     e.target.classList.add("active-habit");
-    setHabitTimePeriod(e.target.innerHTML);
+    setHabitTimePeriod(e.target.textContent);
   };
 
   const clearAllHabitsHandler = () => {

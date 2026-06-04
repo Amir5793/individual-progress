@@ -5,11 +5,14 @@ import AddModal from "../AddModal/AddModal.js";
 import ProgressBar from "../ProgressBar/ProgressBar.js";
 
 export default function Tasks({ showModal, setShowModal, tasks: parentTasks, setTasks: setParentTasks }) {
-  const [tasks, setTasks] = useState(
-    JSON.parse(localStorage.getItem("tasks"))
-      ? JSON.parse(localStorage.getItem("tasks"))
-      : []
-  );
+  const [tasks, setTasks] = useState(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem("tasks"));
+      return Array.isArray(stored) ? stored : [];
+    } catch {
+      return [];
+    }
+  });
 
   // Use parent state if provided, otherwise use local state
   const displayTasks = parentTasks && parentTasks.length > 0 ? parentTasks : tasks;
@@ -68,7 +71,7 @@ export default function Tasks({ showModal, setShowModal, tasks: parentTasks, set
     });
 
     e.target.classList.add("active");
-    setTimePeriod(e.target.innerHTML);
+    setTimePeriod(e.target.textContent);
   };
 
   const clearAllHandler = () => {

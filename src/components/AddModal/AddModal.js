@@ -34,14 +34,16 @@ export default function AddModal({
     }
   }, [showModal]);
 
+  const MAX_INPUT_LENGTH = 200;
+
   const Add = () => {
     // Adds a task or habit into display and also localstorage
-    const value = input.current.value;
+    const value = input.current.value.trim().slice(0, MAX_INPUT_LENGTH);
 
     if (value) {
       if (document.querySelector(".checked")) {
         const timePeriod =
-          document.querySelector(".checked").previousElementSibling.innerHTML;
+          document.querySelector(".checked").previousElementSibling.textContent;
         if (!isTaskModal) {
           const newHabit = createItem(habits, value, selectedColor, timePeriod);
           setHabits((prevValue) => {
@@ -108,7 +110,7 @@ export default function AddModal({
       </div>
       
       <div className="body">
-        <input type="text" ref={input} />
+        <input type="text" ref={input} maxLength={MAX_INPUT_LENGTH} />
         <div className="radio-container">
           <div className="dailyTimePeriod">
             <label htmlFor="dailyTimePeriod">Daily</label>
