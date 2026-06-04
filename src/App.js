@@ -15,13 +15,26 @@ const Wrapper = styled.div`
   padding: 0.5em;
 `;
 
+function safeParseJSON(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    if (raw === null) return fallback;
+    const parsed = JSON.parse(raw);
+    return Array.isArray(fallback)
+      ? Array.isArray(parsed) ? parsed : fallback
+      : parsed;
+  } catch {
+    return fallback;
+  }
+}
+
 function App() {
   let [showModal, setShowModal] = useState(false);
   let [toggle, setToggle] = useState("Tasks");
   let [tasks, setTasks] = useState(loadFromStorage("tasks"));
   let [habits, setHabits] = useState(loadFromStorage("habits"));
   const [darkMode, setDarkMode] = useState(
-    loadFromStorage("theme") === true ? false : true,
+    safeParseJSON("theme", null) === true ? false : true,
   );
   useEffect(() => {
     setDarkMode((prev) => !prev);

@@ -26,8 +26,12 @@ function safeSetItem(key, value) {
 
 export default function Tasks({ showModal, setShowModal, tasks: parentTasks, setTasks: setParentTasks }) {
   const [tasks, setTasks] = useState(() => {
-    const stored = safeParseJSON("tasks", null);
-    return Array.isArray(stored) ? stored : [];
+    try {
+      const stored = JSON.parse(localStorage.getItem("tasks"));
+      return Array.isArray(stored) ? stored : [];
+    } catch {
+      return [];
+    }
   });
 
   // Use parent state if provided, otherwise use local state
@@ -87,7 +91,7 @@ export default function Tasks({ showModal, setShowModal, tasks: parentTasks, set
     });
 
     e.target.classList.add("active");
-    setTimePeriod(e.target.innerHTML);
+    setTimePeriod(e.target.textContent);
   };
 
   const clearAllHandler = () => {

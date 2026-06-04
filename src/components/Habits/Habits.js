@@ -26,8 +26,12 @@ function safeSetItem(key, value) {
 
 export default function Habits({ showModal, setShowModal, habits: parentHabits, setHabits: setParentHabits }) {
   const [habits, setHabits] = useState(() => {
-    const stored = safeParseJSON("habits", null);
-    return Array.isArray(stored) ? stored : [];
+    try {
+      const stored = JSON.parse(localStorage.getItem("habits"));
+      return Array.isArray(stored) ? stored : [];
+    } catch {
+      return [];
+    }
   });
 
   // Use parent state if provided, otherwise use local state
@@ -88,7 +92,7 @@ export default function Habits({ showModal, setShowModal, habits: parentHabits, 
     });
 
     e.target.classList.add("active-habit");
-    setHabitTimePeriod(e.target.innerHTML);
+    setHabitTimePeriod(e.target.textContent);
   };
 
   const clearAllHabitsHandler = () => {
