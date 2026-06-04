@@ -3,11 +3,9 @@ import "./App.css";
 import ToggleButton from "./components/Theme/ReactThemeToggle";
 import Toggler from "./components/Toggler/Toggler.js";
 import AddButton from "./components/AddButton/AddButton.js";
-import Tasks from "./components/Tasks/Tasks.js";
-import Habits from "./components/Habits/Habits.js";
+import ItemList from "./components/ItemList/ItemList.js";
 import AddModal from "./components/AddModal/AddModal.js";
-// import { computeHeadingLevel } from "@testing-library/dom";
-// import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+import { loadFromStorage } from "./utils/storage";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -20,16 +18,8 @@ const Wrapper = styled.div`
 function App() {
   let [showModal, setShowModal] = useState(false);
   let [toggle, setToggle] = useState("Tasks");
-  let [tasks, setTasks] = useState(
-    JSON.parse(localStorage.getItem("tasks"))
-      ? JSON.parse(localStorage.getItem("tasks"))
-      : [],
-  );
-  let [habits, setHabits] = useState(
-    JSON.parse(localStorage.getItem("habits"))
-      ? JSON.parse(localStorage.getItem("habits"))
-      : [],
-  );
+  let [tasks, setTasks] = useState(loadFromStorage("tasks"));
+  let [habits, setHabits] = useState(loadFromStorage("habits"));
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem("theme")) === true ? false : true,
   );
@@ -55,10 +45,20 @@ function App() {
     <div className="App">
       {!showModal && <Toggler toggle={toggle} setToggle={setToggle}></Toggler>}
       {toggle === "Habits" && (
-        <Habits showModal={showModal} setShowModal={setShowModal} habits={habits} setHabits={setHabits} />
+        <ItemList
+          showModal={showModal}
+          storageKey="habits"
+          parentItems={habits}
+          setParentItems={setHabits}
+        />
       )}
       {toggle === "Tasks" && (
-        <Tasks showModal={showModal} setShowModal={setShowModal} tasks={tasks} setTasks={setTasks}></Tasks>
+        <ItemList
+          showModal={showModal}
+          storageKey="tasks"
+          parentItems={tasks}
+          setParentItems={setTasks}
+        />
       )}
       {!showModal && (
         <AddButton
