@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
+import { createItem } from "../../utils/itemUtils";
+import { saveToStorage } from "../../utils/storage";
 import "./AddModal.css";
 
 export default function AddModal({
@@ -35,51 +37,25 @@ export default function AddModal({
   const Add = () => {
     // Adds a task or habit into display and also localstorage
     const value = input.current.value;
-    const nowDate = new Date();
 
     if (value) {
       if (document.querySelector(".checked")) {
+        const timePeriod =
+          document.querySelector(".checked").previousElementSibling.innerHTML;
         if (!isTaskModal) {
-          const newHabit = {
-            id: habits.length,
-            value: value,
-            color: selectedColor,
-            completed: false,
-            timePeriod:
-              document.querySelector(".checked").previousElementSibling
-                .innerHTML,
-            dateCreated: `Created at: ${nowDate.getFullYear()}/${nowDate.getMonth()}/${nowDate.getDay()}`,
-            dateHandler: nowDate.getDate(),
-            daysPassed: 0,
-            weeksPassed: 1,
-            monthsPassed: 1,
-          };
+          const newHabit = createItem(habits, value, selectedColor, timePeriod);
           setHabits((prevValue) => {
             const updatedHabits = [...prevValue, newHabit];
-            localStorage.setItem("habits", JSON.stringify(updatedHabits));
+            saveToStorage("habits", updatedHabits);
             return updatedHabits;
           });
         } else if (isTaskModal) {
-          const newTask = {
-            id: tasks.length,
-            value: value,
-            color: selectedColor,
-            completed: false,
-            timePeriod:
-              document.querySelector(".checked").previousElementSibling
-                .innerHTML,
-            dateCreated: `Created at: ${nowDate.getFullYear()}/${nowDate.getMonth()}/${nowDate.getDay()}`,
-            dateHandler: nowDate.getDate(),
-            daysPassed: 0,
-            weeksPassed: 1,
-            monthsPassed: 1,
-          };
+          const newTask = createItem(tasks, value, selectedColor, timePeriod);
           setTasks((prevValues) => {
             const updatedTasks = [...prevValues, newTask];
-            localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+            saveToStorage("tasks", updatedTasks);
             return updatedTasks;
           });
-          console.log('task created')
         }
         setShowModal(!showModal);
       } else {
