@@ -1,13 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
+import { createItem } from "../../utils/itemUtils";
+import { saveToStorage } from "../../utils/storage";
 import "./AddModal.css";
-
-function safeSetItem(key, value) {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch (e) {
-    console.error(`Failed to write to localStorage key "${key}":`, e);
-  }
-}
 
 export default function AddModal({
   isHabitModal,
@@ -43,7 +37,6 @@ export default function AddModal({
   const Add = () => {
     // Adds a task or habit into display and also localstorage
     const value = input.current.value;
-    const nowDate = new Date();
 
     if (value) {
       const checkedEl = document.querySelector(".checked");
@@ -56,39 +49,17 @@ export default function AddModal({
         const timePeriod = prevSibling.innerHTML;
 
         if (!isTaskModal) {
-          const newHabit = {
-            id: habits.length,
-            value: value,
-            color: selectedColor,
-            completed: false,
-            timePeriod,
-            dateCreated: `Created at: ${nowDate.getFullYear()}/${nowDate.getMonth()}/${nowDate.getDay()}`,
-            dateHandler: nowDate.getDate(),
-            daysPassed: 0,
-            weeksPassed: 1,
-            monthsPassed: 1,
-          };
+          const newHabit = createItem(habits, value, selectedColor, timePeriod);
           setHabits((prevValue) => {
             const updatedHabits = [...prevValue, newHabit];
-            safeSetItem("habits", updatedHabits);
+            saveToStorage("habits", updatedHabits);
             return updatedHabits;
           });
         } else if (isTaskModal) {
-          const newTask = {
-            id: tasks.length,
-            value: value,
-            color: selectedColor,
-            completed: false,
-            timePeriod,
-            dateCreated: `Created at: ${nowDate.getFullYear()}/${nowDate.getMonth()}/${nowDate.getDay()}`,
-            dateHandler: nowDate.getDate(),
-            daysPassed: 0,
-            weeksPassed: 1,
-            monthsPassed: 1,
-          };
+          const newTask = createItem(tasks, value, selectedColor, timePeriod);
           setTasks((prevValues) => {
             const updatedTasks = [...prevValues, newTask];
-            safeSetItem("tasks", updatedTasks);
+            saveToStorage("tasks", updatedTasks);
             return updatedTasks;
           });
         }

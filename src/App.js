@@ -3,11 +3,9 @@ import "./App.css";
 import ToggleButton from "./components/Theme/ReactThemeToggle";
 import Toggler from "./components/Toggler/Toggler.js";
 import AddButton from "./components/AddButton/AddButton.js";
-import Tasks from "./components/Tasks/Tasks.js";
-import Habits from "./components/Habits/Habits.js";
+import ItemList from "./components/ItemList/ItemList.js";
 import AddModal from "./components/AddModal/AddModal.js";
-// import { computeHeadingLevel } from "@testing-library/dom";
-// import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+import { loadFromStorage, saveToStorage } from "./utils/storage";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -17,39 +15,13 @@ const Wrapper = styled.div`
   padding: 0.5em;
 `;
 
-function safeParseJSON(key, fallback) {
-  try {
-    const item = localStorage.getItem(key);
-    if (item === null) return fallback;
-    const parsed = JSON.parse(item);
-    return parsed ?? fallback;
-  } catch (e) {
-    console.error(`Failed to parse localStorage key "${key}":`, e);
-    return fallback;
-  }
-}
-
-function safeSetItem(key, value) {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch (e) {
-    console.error(`Failed to write to localStorage key "${key}":`, e);
-  }
-}
-
 function App() {
   let [showModal, setShowModal] = useState(false);
   let [toggle, setToggle] = useState("Tasks");
-  let [tasks, setTasks] = useState(() => {
-    const stored = safeParseJSON("tasks", null);
-    return Array.isArray(stored) ? stored : [];
-  });
-  let [habits, setHabits] = useState(() => {
-    const stored = safeParseJSON("habits", null);
-    return Array.isArray(stored) ? stored : [];
-  });
+  let [tasks, setTasks] = useState(loadFromStorage("tasks"));
+  let [habits, setHabits] = useState(loadFromStorage("habits"));
   const [darkMode, setDarkMode] = useState(
-    safeParseJSON("theme", null) === true ? false : true,
+    loadFromStorage("theme") === true ? false : true,
   );
   useEffect(() => {
     setDarkMode((prev) => !prev);
@@ -66,17 +38,27 @@ function App() {
       "data-theme",
       !darkMode ? "dark" : "light",
     );
-    safeSetItem("theme", darkMode);
+    saveToStorage("theme", darkMode);
   };
 
   return (
     <div className="App">
       {!showModal && <Toggler toggle={toggle} setToggle={setToggle}></Toggler>}
       {toggle === "Habits" && (
-        <Habits showModal={showModal} setShowModal={setShowModal} habits={habits} setHabits={setHabits} />
+        <ItemList
+          showModal={showModal}
+          storageKey="habits"
+          parentItems={habits}
+          setParentItems={setHabits}
+        />
       )}
       {toggle === "Tasks" && (
-        <Tasks showModal={showModal} setShowModal={setShowModal} tasks={tasks} setTasks={setTasks}></Tasks>
+        <ItemList
+          showModal={showModal}
+          storageKey="tasks"
+          parentItems={tasks}
+          setParentItems={setTasks}
+        />
       )}
       {!showModal && (
         <AddButton
