@@ -11,7 +11,7 @@ export default function Toggler({ setToggle }) {
         });
 
         e.target.classList.add("active-toggle");
-        setToggle(e.target.innerHTML);
+        setToggle(e.target.textContent);
     };
 
     return (

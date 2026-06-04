@@ -35,7 +35,7 @@ export default function ItemList({
     const periods = document.querySelectorAll(".item-time-period");
     periods.forEach((p) => p.classList.remove("period-active"));
     e.target.classList.add("period-active");
-    setTimePeriod(e.target.innerHTML);
+    setTimePeriod(e.target.textContent);
   };
 
   const clearAllHandler = () => {
