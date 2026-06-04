@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import "./Task.css";
 
+function safeSetItem(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    console.error(`Failed to write to localStorage key "${key}":`, e);
+  }
+}
+
 export default function Task({ name, completed, setTasks, id, dateCreated, color }) {
   let [isCompleted, setIsCompleted] = useState(completed);
-  console.log('Task is being shown')
 
   const CheckHandler = () => {
     setTasks((prevTasks) => {
       const newTasks = prevTasks.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
       );
-      localStorage.setItem("tasks", JSON.stringify(newTasks));
+      safeSetItem("tasks", newTasks);
       return newTasks;
     });
     setIsCompleted(!isCompleted);
@@ -18,7 +25,7 @@ export default function Task({ name, completed, setTasks, id, dateCreated, color
   const deleteHandler = () => {
     setTasks((prevTasks) => {
       const newTasks = prevTasks.filter((task) => task.id !== id);
-      localStorage.setItem("tasks", JSON.stringify(newTasks));
+      safeSetItem("tasks", newTasks);
       return newTasks;
     });
   };

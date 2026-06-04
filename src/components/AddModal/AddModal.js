@@ -1,6 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./AddModal.css";
 
+function safeSetItem(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    console.error(`Failed to write to localStorage key "${key}":`, e);
+  }
+}
+
 export default function AddModal({
   isHabitModal,
   isTaskModal,
@@ -38,16 +46,22 @@ export default function AddModal({
     const nowDate = new Date();
 
     if (value) {
-      if (document.querySelector(".checked")) {
+      const checkedEl = document.querySelector(".checked");
+      if (checkedEl) {
+        const prevSibling = checkedEl.previousElementSibling;
+        if (!prevSibling) {
+          setError("Could not determine the time period");
+          return;
+        }
+        const timePeriod = prevSibling.innerHTML;
+
         if (!isTaskModal) {
           const newHabit = {
             id: habits.length,
             value: value,
             color: selectedColor,
             completed: false,
-            timePeriod:
-              document.querySelector(".checked").previousElementSibling
-                .innerHTML,
+            timePeriod,
             dateCreated: `Created at: ${nowDate.getFullYear()}/${nowDate.getMonth()}/${nowDate.getDay()}`,
             dateHandler: nowDate.getDate(),
             daysPassed: 0,
@@ -56,7 +70,7 @@ export default function AddModal({
           };
           setHabits((prevValue) => {
             const updatedHabits = [...prevValue, newHabit];
-            localStorage.setItem("habits", JSON.stringify(updatedHabits));
+            safeSetItem("habits", updatedHabits);
             return updatedHabits;
           });
         } else if (isTaskModal) {
@@ -65,9 +79,7 @@ export default function AddModal({
             value: value,
             color: selectedColor,
             completed: false,
-            timePeriod:
-              document.querySelector(".checked").previousElementSibling
-                .innerHTML,
+            timePeriod,
             dateCreated: `Created at: ${nowDate.getFullYear()}/${nowDate.getMonth()}/${nowDate.getDay()}`,
             dateHandler: nowDate.getDate(),
             daysPassed: 0,
@@ -76,10 +88,9 @@ export default function AddModal({
           };
           setTasks((prevValues) => {
             const updatedTasks = [...prevValues, newTask];
-            localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+            safeSetItem("tasks", updatedTasks);
             return updatedTasks;
           });
-          console.log('task created')
         }
         setShowModal(!showModal);
       } else {

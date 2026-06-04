@@ -17,21 +17,39 @@ const Wrapper = styled.div`
   padding: 0.5em;
 `;
 
+function safeParseJSON(key, fallback) {
+  try {
+    const item = localStorage.getItem(key);
+    if (item === null) return fallback;
+    const parsed = JSON.parse(item);
+    return parsed ?? fallback;
+  } catch (e) {
+    console.error(`Failed to parse localStorage key "${key}":`, e);
+    return fallback;
+  }
+}
+
+function safeSetItem(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    console.error(`Failed to write to localStorage key "${key}":`, e);
+  }
+}
+
 function App() {
   let [showModal, setShowModal] = useState(false);
   let [toggle, setToggle] = useState("Tasks");
-  let [tasks, setTasks] = useState(
-    JSON.parse(localStorage.getItem("tasks"))
-      ? JSON.parse(localStorage.getItem("tasks"))
-      : [],
-  );
-  let [habits, setHabits] = useState(
-    JSON.parse(localStorage.getItem("habits"))
-      ? JSON.parse(localStorage.getItem("habits"))
-      : [],
-  );
+  let [tasks, setTasks] = useState(() => {
+    const stored = safeParseJSON("tasks", null);
+    return Array.isArray(stored) ? stored : [];
+  });
+  let [habits, setHabits] = useState(() => {
+    const stored = safeParseJSON("habits", null);
+    return Array.isArray(stored) ? stored : [];
+  });
   const [darkMode, setDarkMode] = useState(
-    JSON.parse(localStorage.getItem("theme")) === true ? false : true,
+    safeParseJSON("theme", null) === true ? false : true,
   );
   useEffect(() => {
     setDarkMode((prev) => !prev);
@@ -48,7 +66,7 @@ function App() {
       "data-theme",
       !darkMode ? "dark" : "light",
     );
-    localStorage.setItem("theme", JSON.stringify(darkMode));
+    safeSetItem("theme", darkMode);
   };
 
   return (
