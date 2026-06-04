@@ -5,6 +5,8 @@ export default function ProgressBar({ completedValuesLength, valuesLength }) {
 
   useEffect(() => {
     const bar = document.querySelector(".bar");
+    if (!bar) return;
+
     if (completedValuesLength === 0) {
       bar.style.width = "0%";
     } else {

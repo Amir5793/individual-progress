@@ -4,6 +4,26 @@ import Task from "./Task/Task.js";
 import AddModal from "../AddModal/AddModal.js";
 import ProgressBar from "../ProgressBar/ProgressBar.js";
 
+function safeParseJSON(key, fallback) {
+  try {
+    const item = localStorage.getItem(key);
+    if (item === null) return fallback;
+    const parsed = JSON.parse(item);
+    return parsed ?? fallback;
+  } catch (e) {
+    console.error(`Failed to parse localStorage key "${key}":`, e);
+    return fallback;
+  }
+}
+
+function safeSetItem(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    console.error(`Failed to write to localStorage key "${key}":`, e);
+  }
+}
+
 export default function Tasks({ showModal, setShowModal, tasks: parentTasks, setTasks: setParentTasks }) {
   const [tasks, setTasks] = useState(() => {
     try {
@@ -78,7 +98,7 @@ export default function Tasks({ showModal, setShowModal, tasks: parentTasks, set
     if (setParentTasks) {
       setParentTasks([]);
     } else {
-      localStorage.setItem("tasks", JSON.stringify([]));
+      safeSetItem("tasks", []);
       setTasks([]);
     }
   };

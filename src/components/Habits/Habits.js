@@ -4,6 +4,26 @@ import Habit from "./Habit/Habit";
 import AddModal from "../AddModal/AddModal";
 import ProgressBar from "../ProgressBar/ProgressBar";
 
+function safeParseJSON(key, fallback) {
+  try {
+    const item = localStorage.getItem(key);
+    if (item === null) return fallback;
+    const parsed = JSON.parse(item);
+    return parsed ?? fallback;
+  } catch (e) {
+    console.error(`Failed to parse localStorage key "${key}":`, e);
+    return fallback;
+  }
+}
+
+function safeSetItem(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    console.error(`Failed to write to localStorage key "${key}":`, e);
+  }
+}
+
 export default function Habits({ showModal, setShowModal, habits: parentHabits, setHabits: setParentHabits }) {
   const [habits, setHabits] = useState(() => {
     try {
@@ -79,7 +99,7 @@ export default function Habits({ showModal, setShowModal, habits: parentHabits, 
     if (setParentHabits) {
       setParentHabits([]);
     } else {
-      localStorage.setItem("habits", JSON.stringify([]));
+      safeSetItem("habits", []);
       setHabits([]);
     }
   };

@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import "./Habit.css";
 
+function safeSetItem(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    console.error(`Failed to write to localStorage key "${key}":`, e);
+  }
+}
+
 export default function Habits({ name, completed, setHabits, id, dateCreated, color }) {
   let [isCompleted, setIsCompleted] = useState(completed);
 
@@ -9,7 +17,7 @@ export default function Habits({ name, completed, setHabits, id, dateCreated, co
       const newHabits = prevHabits.map((habit) =>
         habit.id === id ? { ...habit, completed: !habit.completed } : habit
       );
-      localStorage.setItem("habits", JSON.stringify(newHabits));
+      safeSetItem("habits", newHabits);
       return newHabits;
     });
     setIsCompleted(!isCompleted);
@@ -17,7 +25,7 @@ export default function Habits({ name, completed, setHabits, id, dateCreated, co
   const deleteHandler = () => {
     setHabits((prevHabits) => {
       const newHabits = prevHabits.filter((habit) => habit.id !== id);
-      localStorage.setItem("habits", JSON.stringify(newHabits));
+      safeSetItem("habits", newHabits);
       return newHabits;
     });
   };

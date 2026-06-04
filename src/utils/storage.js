@@ -1,14 +1,18 @@
-export function loadFromStorage(key) {
+export function loadFromStorage(key, fallback = []) {
   try {
     const data = localStorage.getItem(key);
-    if (data === null) return [];
-    const parsed = JSON.parse(data);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
+    if (data === null) return fallback;
+    return JSON.parse(data) ?? fallback;
+  } catch (e) {
+    console.error(`Failed to parse localStorage key "${key}":`, e);
+    return fallback;
   }
 }
 
 export function saveToStorage(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    console.error(`Failed to write to localStorage key "${key}":`, e);
+  }
 }

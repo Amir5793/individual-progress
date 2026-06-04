@@ -5,7 +5,7 @@ import Toggler from "./components/Toggler/Toggler.js";
 import AddButton from "./components/AddButton/AddButton.js";
 import ItemList from "./components/ItemList/ItemList.js";
 import AddModal from "./components/AddModal/AddModal.js";
-import { loadFromStorage } from "./utils/storage";
+import { loadFromStorage, saveToStorage } from "./utils/storage";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -51,7 +51,7 @@ function App() {
       "data-theme",
       !darkMode ? "dark" : "light",
     );
-    localStorage.setItem("theme", JSON.stringify(darkMode));
+    saveToStorage("theme", darkMode);
   };
 
   return (
