@@ -64,6 +64,10 @@
   border: none;
 }
 
+.active{
+  transform: scale(.85);
+}
+
 .radio-container {
   display: flex;
   gap: 5px;

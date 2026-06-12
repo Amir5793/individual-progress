@@ -3,12 +3,12 @@ export function resetItemsByTimePeriod(items) {
   return items.map((item) => {
     const copy = { ...item };
     if (
-      copy.dateHandler !== nowDate.getDay() &&
+      copy.dateHandler !== nowDate.getDate() &&
       copy.timePeriod === "Daily"
     ) {
       copy.completed = false;
       copy.daysPassed = nowDate.getDay() - copy.dateHandler;
-      copy.dateHandler = nowDate.getDay();
+      copy.dateHandler = nowDate.getDate();
     }
     if (
       copy.daysPassed / copy.weeksPassed / 7 === 1 &&

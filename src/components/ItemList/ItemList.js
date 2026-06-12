@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from "react";
 import ItemCard from "../ItemCard/ItemCard";
 import ProgressBar from "../ProgressBar/ProgressBar";
+import AddModal from "../AddModal/AddModal";
 import { loadFromStorage, saveToStorage } from "../../utils/storage";
 import { resetItemsByTimePeriod, countItems } from "../../utils/itemUtils";
 import "./ItemList.css";
 
 export default function ItemList({
   showModal,
+  setShowModal,
   storageKey,
   parentItems,
   setParentItems,
+  setTasks,
+  setHabits,
+  habits,
+  tasks,
 }) {
   const [items, setItems] = useState(loadFromStorage(storageKey));
+  const [title, setTitle] = useState("");
 
   const displayItems =
     parentItems && parentItems.length > 0 ? parentItems : items;
@@ -40,7 +47,19 @@ export default function ItemList({
 
   const clearAllHandler = () => {
     if (setParentItems) {
-      setParentItems([]);
+      setParentItems((prev) => []);
+      saveToStorage(storageKey, []);
+      setItems([]);
+      console.log(parentItems);
+    } else {
+      saveToStorage(storageKey, []);
+      setItems([]);
+    }
+    if (setParentItems) {
+      setParentItems((prev) => []);
+      saveToStorage(storageKey, []);
+      setItems([]);
+      console.log(parentItems);
     } else {
       saveToStorage(storageKey, []);
       setItems([]);
@@ -53,21 +72,23 @@ export default function ItemList({
     <div className="main-container">
       {!showModal && (
         <div>
-          <div className="item-list-container">
-            <div className="item-list-periods">
-              <h3
-                className="item-time-period period-active"
-                onClick={timePeriodHandler}
-              >
-                Daily
-              </h3>
-              <h3 className="item-time-period" onClick={timePeriodHandler}>
-                Weekly
-              </h3>
-              <h3 className="item-time-period" onClick={timePeriodHandler}>
-                Monthly
-              </h3>
+            <div className="item-list-period-container">
+              <div className="item-list-periods">
+                <h3
+                  className="item-time-period daily-time-period period-active"
+                  onClick={timePeriodHandler}
+                >
+                  Daily
+                </h3>
+                <h3 className="item-time-period weekly-time-period" onClick={timePeriodHandler}>
+                  Weekly
+                </h3>
+                <h3 className="item-time-period monthly-time-period" onClick={timePeriodHandler}>
+                  Monthly
+                </h3>
+              </div>
             </div>
+          <div className="item-list-container">
             {processedItems.map(
               (item) =>
                 !item.completed &&
@@ -81,6 +102,11 @@ export default function ItemList({
                     dateCreated={item.dateCreated}
                     setItems={activeSetItems}
                     storageKey={storageKey}
+                    clearAllHandler={clearAllHandler}
+                    processedItems={processedItems}
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                    setTitle={setTitle}
                   />
                 ),
             )}
@@ -98,6 +124,10 @@ export default function ItemList({
                     dateCreated={item.dateCreated}
                     setItems={activeSetItems}
                     storageKey={storageKey}
+                    clearAllHandler={clearAllHandler}
+                    processedItems={processedItems}
+                    showModal={showModal}
+                    setTitle={setTitle}
                   />
                 ),
             )}
@@ -115,6 +145,18 @@ export default function ItemList({
             </svg>
           </div>
         </div>
+      )}
+      {showModal && (
+        <AddModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          setTasks={setTasks}
+          setHabits={setHabits}
+          habits={habits}
+          tasks={tasks}
+          isTaskModal={true}
+          title={title}
+        ></AddModal>
       )}
     </div>
   );

@@ -12,6 +12,7 @@ export default function AddModal({
   setHabits,
   tasks,
   setTasks,
+  title='',
 }) {
   const [error, setError] = useState(null);
   const [habitAddOns, setHabitAddOns] = useState(false);
@@ -23,18 +24,19 @@ export default function AddModal({
   useEffect(() => {
     showModalRef.current = showModal;
   }, [showModal]);
-
+  
   // Reset error when modal opens/closes
   useEffect(() => {
     if (showModal) {
       setError(null);
       if (input.current) {
-        input.current.value = "";
+        input.current.value = title;
       }
     }
   }, [showModal]);
-
+  
   const MAX_INPUT_LENGTH = 200;
+  
 
   const Add = () => {
     // Adds a task or habit into display and also localstorage
@@ -110,7 +112,7 @@ export default function AddModal({
       </div>
       
       <div className="body">
-        <input type="text" ref={input} maxLength={MAX_INPUT_LENGTH} />
+        <input type="text" ref={input} maxLength={MAX_INPUT_LENGTH} onKeyDown={(e) => {e.code == "Enter" && Add()}} />
         <div className="radio-container">
           <div className="dailyTimePeriod">
             <label htmlFor="dailyTimePeriod">Daily</label>

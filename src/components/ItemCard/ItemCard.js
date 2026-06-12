@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { saveToStorage } from "../../utils/storage";
+import AddModal from "../AddModal/AddModal";
 import "./ItemCard.css";
 
 export default function ItemCard({
@@ -10,6 +11,11 @@ export default function ItemCard({
   dateCreated,
   color,
   storageKey,
+  clearAllHandler,
+  processedItems,
+  showModal,
+  setShowModal,
+  setTitle,
 }) {
   let [isCompleted, setIsCompleted] = useState(completed);
 
@@ -25,11 +31,19 @@ export default function ItemCard({
   };
 
   const deleteItem = () => {
-    setItems((prevItems) => {
-      const newItems = prevItems.filter((item) => item.id !== id);
-      saveToStorage(storageKey, newItems);
-      return newItems;
-    });
+    processedItems.length == 1
+      ? clearAllHandler()
+      : setItems((prevItems) => {
+          const newItems = prevItems.filter((item) => item.id !== id);
+          saveToStorage(storageKey, newItems);
+          return newItems;
+        });
+  };
+
+  const editItem = () => {
+    deleteItem();
+    setTitle(name)
+    setShowModal(!showModal);
   };
 
   return (
@@ -39,6 +53,25 @@ export default function ItemCard({
       </div>
       <div className="date">{dateCreated}</div>
       <div className="conditional-container">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1em"
+          height="1em"
+          viewBox="0 0 24 24"
+          onClick={editItem}
+          className="editSvg"
+        >
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path
+            fill="yellow"
+            d="M5 21h14c1.1 0 2-.9 2-2v-8h-2v8H5V5h8V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2"
+          />
+          <path
+            fill="yellow"
+            d="M7 14v2c0 .55.45 1 1 1h2c.27 0 .52-.11.71-.29l7.65-7.65l-3.41-3.41L7.3 13.3a1 1 0 0 0-.29.71Zm13.71-7.29a.996.996 0 0 0 0-1.41l-2-2a.996.996 0 0 0-1.41 0l-1.65 1.65l3.41 3.41z"
+          />
+        </svg>
+
         <svg
           onClick={deleteItem}
           xmlns="http://www.w3.org/2000/svg"

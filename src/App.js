@@ -21,7 +21,9 @@ function safeParseJSON(key, fallback) {
     if (raw === null) return fallback;
     const parsed = JSON.parse(raw);
     return Array.isArray(fallback)
-      ? Array.isArray(parsed) ? parsed : fallback
+      ? Array.isArray(parsed)
+        ? parsed
+        : fallback
       : parsed;
   } catch {
     return fallback;
@@ -60,6 +62,11 @@ function App() {
       {toggle === "Habits" && (
         <ItemList
           showModal={showModal}
+          setShowModal={setShowModal}
+          setTasks={setTasks}
+          setHabits={setHabits}
+          habits={habits}
+          tasks={tasks}
           storageKey="habits"
           parentItems={habits}
           setParentItems={setHabits}
@@ -68,6 +75,11 @@ function App() {
       {toggle === "Tasks" && (
         <ItemList
           showModal={showModal}
+          setShowModal={setShowModal}
+          setTasks={setTasks}
+          setHabits={setHabits}
+          habits={habits}
+          tasks={tasks}
           storageKey="tasks"
           parentItems={tasks}
           setParentItems={setTasks}

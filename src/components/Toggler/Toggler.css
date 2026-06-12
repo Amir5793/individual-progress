@@ -1,9 +1,9 @@
-.toggle-ables {
+.toggles-container {
   position: sticky;
   top: 0px;
-  width: 100%;
+  width: 100vw;
+  margin-top: 3vh;
   display: flex;
-  gap: 2vw;
   justify-content: center;
   cursor: pointer;
   user-select: none;
@@ -11,9 +11,35 @@
   color: var(--text-color);
   transition: background-color ease 1s;
 }
+.toggles-able {
+  background-color: var(--primary-color);
+  width: 62.5%;
+  height: 7vh;
+  display: flex;
+  border-top-left-radius: 3vw;
+  border-top-right-radius: 3vw;
+}
+.toggle-able {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h3 {
+  margin: 0px !important;
+}
+
+.tasks-toggle-able {
+  border-top-left-radius: 3vw;
+}
+.habits-toggle-able {
+  border-top-right-radius: 3vw;
+}
 
 .active-toggle {
-  border-bottom: 1px var(--text-color) solid;
+  /* border-bottom: 1px var(--text-color) solid;
   transform: scale(0.8);
-  padding: 1vh;
+  padding: 1vh; */
+  background-color: var(--secondary-color);
 }
